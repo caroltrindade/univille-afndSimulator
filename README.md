@@ -1,28 +1,28 @@
 
 # Como utilizar o simulador de Autômatos Finitos Não Determinísticos
-O arquivo 'entries.txt' possui um exemplo de como informar um autômato, além disto, abaixo tem-se mais informações de como utilizar e declarar as informações neste simulador.
+O arquivo `entries.txt` possui um exemplo de como informar um autômato, além disto, abaixo tem-se mais informações de como utilizar e declarar as informações neste simulador.
 
 ## Informando o alfabeto e os estados
-Os elementos do alfabeto devem ser informados na primeira linha do arquivo 'entries.txt', separados por espaço.
+Os elementos do alfabeto devem ser informados na primeira linha do arquivo `entries.txt`, separados por espaço.
 
-Os estados devem ser informados na segunda linha do arquivo 'entries.txt', separados por espaço.
-Para utilizar o símbolo epson, deve-se declarar como elemento do alfabeto os caracteres '%e'.
+Os estados devem ser informados na segunda linha do arquivo `entries.txt`, separados por espaço.
+Para utilizar o símbolo epson, deve-se declarar como elemento do alfabeto os caracteres `%e`.
 
 ## Informando o estado inicial e os estados de aceitação
-O estado inicial deve ser informado na terceira linha do arquivo 'entries.txt'
+O estado inicial deve ser informado na terceira linha do arquivo `entries.txt`
 
-Os estados de aceitação devem ser informados na segunda linha do arquivo 'entries.txt', separados por espaço caso haja mais de um.
+Os estados de aceitação devem ser informados na segunda linha do arquivo `entries.txt`, separados por espaço caso haja mais de um.
 
 ## Informando as transições
-Deve ser listada uma transição por linha e após listar as transições de um estado, deve-se colocar os caracteres '--' sozinhos em uma linha para indicar que foram finalizadas as transições de um estado.
+Deve ser listada uma transição por linha e após listar as transições de um estado, deve-se colocar os caracteres `--` sozinhos em uma linha para indicar que foram finalizadas as transições de um estado.
 
-Quando um estado não possui transição para determinado elemento do alfabeto, deve-se utilizar o caractere '*' para representar a falta de transição.
+Quando um estado não possui transição para determinado elemento do alfabeto, deve-se utilizar o caractere `*` para representar a falta de transição.
 
 Quando um estado possuir uma transição para mais de um estado para determinado elemento do alfabeto, deve-se separar os estados por espaço.
 
 As transições de cada estado devem seguir a ordem em que foram declarados os estados. Assim como a transição que corresponde a cada elemento do alfabeto também deve seguir a ordem em que os elementos foram declarados.
 
-Exemplo de declaração do arquivo entries.txt:
+Exemplo de declaração do arquivo `entries.txt`:
 ```
 1 2 # Linha do alfabeto
 q1 q2 q3 # Linha com os estados
@@ -51,7 +51,7 @@ Para utilizar o simulador pela primeira vez, é preciso:
 Para executar o simulador basta entrar na pasta do projeto do simulador e executar o comando `node index.js`.
 
 ## Informando a entrada
-Assim que o simulador é executado, por padrão, é sugerido uma entrada (011) que é considerada quando nenhuma entrada é informada, ou seja, é somente teclado 'Enter'.
+Assim que o simulador é executado, por padrão, é sugerido uma entrada (011) que é considerada quando nenhuma entrada é informada, ou seja, é somente teclado `Enter`.
 
 Para inserir a entrada basta digitar a entrada no campo em que é solicitada, conforme a imagem:
 
