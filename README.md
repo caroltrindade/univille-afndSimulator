@@ -61,7 +61,7 @@ Assim que o simulador é executado, por padrão, é sugerido uma entrada (011) q
 
 Para inserir a entrada basta digitar a entrada no campo em que é solicitada, conforme a imagem:
 
-
+![image](https://user-images.githubusercontent.com/32417804/117222953-03ed5900-ade3-11eb-945d-a92f4efd540a.png)
 
 Caso a entrada possua símbolos que não estejam no alfabeto, o símbolo inválido será ignorado e o simulador continuará a execução até que encontre o próximo símbolo válido (que esteja no alfabeto)).
 
