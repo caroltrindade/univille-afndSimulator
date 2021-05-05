@@ -66,6 +66,7 @@ Para inserir a entrada basta digitar a entrada no campo em que é solicitada, co
 Caso a entrada possua símbolos que não estejam no alfabeto, o símbolo inválido será ignorado e o simulador continuará a execução até que encontre o próximo símbolo válido (que esteja no alfabeto)).
 
 ## Retornos sobre o autômato executado
+#
 As informações acerca da execução do autômato estão divididas entre os arquivos:
 - **entries.txt:** Descrição do autômato e suas informações. Possui um autômato já descrito, para exemplificar.
 - **steps.txt:** Descreve a execução do autômato, as entradas lidas e os estados atuais após a leitura de cada entrada.
