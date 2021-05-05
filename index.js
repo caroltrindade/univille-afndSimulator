@@ -13,13 +13,14 @@ const verifyEpsonTransition = ({ alphabet, indexState, transitions }) => {
   return toState;
 };
 
-/** make the transition to destiny state */
+/** Make the transition to destiny state */
 const makeTransition = async ({ toState, states}) => {
   await toState.map(( state ) => { 
     states.push(state)
   });
 };
 
+/** Verify if the state, and your subsequent states have a epson transition */
 const manageEpsonTransition = async ({
   alphabet,
   indexState,
@@ -36,14 +37,17 @@ const manageEpsonTransition = async ({
       toStateEpsonTransition.push(epsonTransitions);
   
       for (states of epsonTransitions) {
-        // await makeTransition({ toState: epsonTransitions, states: newCurrentStates})
+        
         await epsonTransitions.map(async (state) => {
           const indexStateEpsonTransition = states.indexOf(state);
           const toStateEpsonTransition = transitions[indexState][indexSymbol];
           const epsonSymbol = '%e';
           const indexEpson = alphabet.indexOf(epsonSymbol);
   
+          /** Verify if the subsequent states have a epson transition */
           const epsonSecondaryTransitions = await manageEpsonTransition({ alphabet, indexState: indexStateEpsonTransition, indexSymbol: indexEpson, transitions });
+          
+          /** Verify if the state have a epson transition and, if have, add the epson's final state into states list to make a transition */
           if (epsonSecondaryTransitions.length) toStateEpsonTransition.push(epsonSecondaryTransitions);
         });
       }
@@ -66,15 +70,15 @@ const walkStates = async ({
     const currentState = currentStates[indexCurrentState];
     const indexSymbol = alphabet.indexOf(symbol);
     const indexState = states.indexOf(currentState);
-    console.log('currentStates', currentStates);
-    console.log('currentState', currentState);
-    console.log('indexState', indexState);
-    console.log('indexSymbol', indexSymbol);
     const toState = transitions[indexState][indexSymbol];
+
+    /** Validate if the symbol have a transition, if don't have, ignore the symbol and the copy doesn't will be considered */
+    if (toState[0] === '*') continue;
 
     /** Validate if the symbol is into the alphabet and if is, ignore the symbol */
     if (indexSymbol < 0) continue;
 
+    /** Manages the epson transition from the current state */
     const toStateEpsonTransition = await manageEpsonTransition({ alphabet, indexState, indexSymbol, transitions });;
     if (toStateEpsonTransition.length) await makeTransition({ toState: toStateEpsonTransition, states: newCurrentStates});
     
@@ -91,7 +95,7 @@ const run = (async () => {
     const resultFile = './result.txt';
     
     /** format the text in lines and separate the data in variables */
-    const [states, alphabet, initialState, acceptedStates, ...transitionsUnformatted] = fileText.split('\n').map(row => {
+    const [alphabet, states, initialState, acceptedStates, ...transitionsUnformatted] = fileText.split('\n').map(row => {
       /** Remove the comment from line and separate the elements by space */
       return row.split(/(\s+#)/g)[0].split(/\s/g);
     });
@@ -133,11 +137,12 @@ const run = (async () => {
     await fs.appendFileSync(stepsFile, '\n--------------------------------------------------', () => {});
     await fs.appendFileSync(stepsFile, `\nEstado inicial: ${initialState}`, () => {});
 
-    let entryAceppted = false, currentStates = [ initialState[0] ], newCurrentStates = [ initialState[0] ];
+    let entryAccepted = false, currentStates = [ initialState[0] ], newCurrentStates = [ initialState[0] ];
 
     for (const symbol of entry) {
       await fs.appendFileSync(stepsFile, `\nSímbolo lido: ${symbol}`, () => {});
       
+      /** Walk in the automaton */
       newCurrentStates = await walkStates({
         alphabet,
         states,
@@ -146,6 +151,7 @@ const run = (async () => {
         currentStates,
       })
 
+      /** Write te current states in the steps file */
       await fs.appendFileSync(stepsFile, `\nEstados correntes: ${newCurrentStates.join(' ')}`, () => {});
       currentStates = newCurrentStates;
     }
@@ -153,10 +159,11 @@ const run = (async () => {
     /** Open, or create if not exists, the result file */
     await fs.open(resultFile, 'w', () => {});
     
-    entryAceppted = currentStates.some(state => !(acceptedStates.indexOf(state) < 0));
+    /** Verify if the entry was accepted */
+    entryAccepted = currentStates.some(state => !(acceptedStates.indexOf(state) < 0));
 
     /** Write the result in the result file */
-    if (entryAceppted) await fs.writeFile(resultFile, `Entrada ${answer.entry} ACEITA`, () => {});
+    if (entryAccepted) await fs.writeFile(resultFile, `Entrada ${answer.entry} ACEITA`, () => {});
     else await fs.writeFile(resultFile, `Entrada ${answer.entry} REJEITADA`, () => {});
   } catch (error) {
     console.log('Error in AFND simulator:', error);

@@ -1,5 +1,5 @@
-q1 q2 q3 q4 # Linha com o conjunto de estados, separados por espaço
 0 1 %e # Linha com o alfabeto, separados por espaço
+q1 q2 q3 q4 # Linha com o conjunto de estados, separados por espaço
 q1 # Linha com o estado inicial
 q4 # Linha com os estados de aceitação, separados por espaço
 q1  # matriz: linha 0, coluna 0
