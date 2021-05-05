@@ -1,0 +1,14 @@
+
+Estados: q1,q2,q3,q4�o: q4
+Alfabeto: 0,1,%e
+--------------------------------------------------
+Entrada: 010101
+--------------------------------------------------
+Estado inicial: q1
+Símbolo lido: 0
+Estados correntes: q1
+Símbolo lido: 1
+Estados correntes: q3 q1 q2
+Símbolo lido: 0
+Estados correntes: * q1 q3
+Símbolo lido: 1

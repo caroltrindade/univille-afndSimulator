@@ -1,0 +1,6 @@
+{
+  "name": "afn-simulator",
+  "dependencies": {
+    "inquirer": "^8.0.0"
+  }
+}

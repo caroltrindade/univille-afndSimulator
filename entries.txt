@@ -1,0 +1,20 @@
+q1 q2 q3 q4 # Linha com o conjunto de estados, separados por espaço
+0 1 %e # Linha com o alfabeto, separados por espaço
+q1 # Linha com o estado inicial
+q4 # Linha com os estados de aceitação, separados por espaço
+q1  # matriz: linha 0, coluna 0
+q1 q2 # matriz: linha 0, coluna 1
+*  # matriz: linha 0, coluna 2: não possui transição
+-- # Finaliza as transições de um estado
+q3  # matriz: linha 1, coluna 0
+*  # matriz: linha 1, coluna 1: não possui transição
+q3  # matriz: linha 1, coluna 2 (épison)
+-- # Finaliza as transições de um estado
+*  # matriz: linha 2, coluna 0: não possui transição
+q4  # matriz: linha 2, coluna 1
+*  # matriz: linha 2, coluna 2: não possui transição
+-- # Finaliza as transições de um estado
+q4  # matriz: linha 3, coluna 0
+q4  # matriz: linha 3, coluna 1
+*  # matriz: linha 3, coluna 2: não possui transição
+-- # Finaliza as transições de um estado
